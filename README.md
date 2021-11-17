@@ -49,3 +49,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ### 시스템 구성도
 ![image](https://user-images.githubusercontent.com/42136056/142156109-2ffb4b6a-3a8e-448c-98c8-3e5d7b072692.png)
+
+### 시행화면
+ - 로그인 / 회원가입
+![회원가입](https://user-images.githubusercontent.com/42136056/142160767-69b81681-b25b-418f-a4bb-8b4321a7d9b9.gif)
+
