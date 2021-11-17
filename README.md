@@ -1,4 +1,4 @@
-# Spring-React-School-LastProject
+# SpringBoot-React-School-LastProject
 
 ### 스프링부트
 
