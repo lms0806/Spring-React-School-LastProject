@@ -55,3 +55,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ![회원가입](https://user-images.githubusercontent.com/42136056/142160767-69b81681-b25b-418f-a4bb-8b4321a7d9b9.gif)
 
+ - 게시글 관련
+
+![게시글](https://user-images.githubusercontent.com/42136056/142160873-ed3d5a3b-fb08-48f6-9108-96b422e9670d.gif)
+
+
+ - 댓글 관련
+
+![댓글](https://user-images.githubusercontent.com/42136056/142160905-8f04035f-08a6-4caf-ab41-d755e3ba79bc.gif)
+
+ - 회원정보
+
+![회원정보](https://user-images.githubusercontent.com/42136056/142160945-95ac0da1-5f2a-43ee-8b50-05dbf0faf58b.gif)
+
