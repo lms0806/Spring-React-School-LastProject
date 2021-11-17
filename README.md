@@ -46,3 +46,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ### 구조도
 ![image](https://user-images.githubusercontent.com/42136056/142155950-9e6fcad5-8735-4666-9804-82167d027385.png)
+
+### 시스템 구성도
+![image](https://user-images.githubusercontent.com/42136056/142156109-2ffb4b6a-3a8e-448c-98c8-3e5d7b072692.png)
