@@ -43,3 +43,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 |     아이디 찾기      |       입력한 이메일을 기반으로 아이디를 찾을 수 있습니다.      |
 |     비밀번호 찾기      |       입력한 아이디와 이메일을 기반으로 비밀번호를 찾을 수 있습니다.       |
 |     회원 탈퇴      |       로그인한 회원의 정보가 포함된 모든 정보를 삭제합니다.       |
+
+### 구조도
+![image](https://user-images.githubusercontent.com/42136056/142155950-9e6fcad5-8735-4666-9804-82167d027385.png)
