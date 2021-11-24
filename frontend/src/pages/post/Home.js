@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PostItem from '../../components/PostItem';
-import { Pagination } from 'react-bootstrap';
+import { Pagination, Table } from 'react-bootstrap';
+import { BsFlagFill } from 'react-icons/bs';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -17,6 +18,7 @@ const Home = () => {
         console.log('hi');
         console.log(res.content);
         console.log('hi');
+        console.log(res.content);
         setPosts(res.content);
         setLast(res.last);
       });
@@ -32,9 +34,27 @@ const Home = () => {
 
   return (
     <div>
-      {posts.map((post) => (
-        <PostItem key={post.id} id={post.id} title={post.title} />
-      ))}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>
+              <BsFlagFill /> 조회수
+            </th>
+          </tr>
+        </thead>
+        {posts.map((post) => (
+          <PostItem
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            writer={post.user.username}
+            views={post.views}
+          />
+        ))}
+      </Table>
       <br />
       <div className="d-flex justify-content-center">
         <Pagination>
@@ -45,6 +65,9 @@ const Home = () => {
           ) : (
             <Pagination.Item onClick={prev}>Prev</Pagination.Item>
           )}
+          &nbsp;
+          {page}
+          &nbsp;
           {last === true ? (
             <Pagination.Item onClick={next} disabled>
               Next

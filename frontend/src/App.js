@@ -33,7 +33,11 @@ function App() {
         <Route path="/" exact={true} component={Home} />
         <Route path="/saveForm" exact={true} component={SaveForm} />
         <Route path="/post/:id" exact={true} component={Detail} />
-        <Route path="/post/search/:keyword" exact={true} component={Search} />
+        <Route
+          path="/post/search/:keyword/:type"
+          exact={true}
+          component={Search}
+        />
         <Route path="/loginForm" exact={true} component={LoginForm} />
         <Route path="/joinForm" exact={true} component={JoinForm} />
         <Route path="/myinfo" exact={true} component={Myinfo} />

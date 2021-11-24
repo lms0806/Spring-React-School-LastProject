@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Button, Card, Form } from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 import { Link } from 'react-router-dom';
-import PostItem from '../../components/PostItem';
+import { BsFillHandThumbsUpFill } from 'react-icons/bs';
 import ReplyItem from '../../components/ReplyItem';
 
 const Detail = (props) => {
@@ -37,6 +37,15 @@ const Detail = (props) => {
     let jwtToken = jwtTokenTemp.replace('Bearer ', '');
 
     setUserId(jwt_decode(jwtToken).id);
+
+    fetch('http://localhost:8000/post/' + props.match.params.id, {
+      method: 'POST',
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+      },
+    })
+      .then((res) => res.text())
+      .then();
 
     fetch('http://localhost:8000/post/' + props.match.params.id, {
       method: 'GET',
@@ -121,11 +130,14 @@ const Detail = (props) => {
 
       <br />
       <hr />
-      <h1>{post.title}</h1>
+      <h1>제목 : {post.title}</h1>
       <hr />
-      <div>{post.content}</div>
+      <div>내용 : {post.content}</div>
+      <br />
+      <div>작성자 : {post.user.username}</div>
       <hr />
-
+      <div>조회수 : {post.views}</div>
+      <hr />
       <Card className="text-center">
         <Card.Body>
           <Form.Group>

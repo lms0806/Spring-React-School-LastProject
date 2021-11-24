@@ -77,7 +77,8 @@ const UpdateForm = (props) => {
             onChange={changeValue}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={updatePost}>
+        <br />
+        <Button variant="dark" type="submit" onClick={updatePost}>
           글수정
         </Button>
       </Form>

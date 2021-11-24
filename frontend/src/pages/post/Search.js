@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Pagination } from 'react-bootstrap';
+import { Pagination, Table } from 'react-bootstrap';
+import { BsFlagFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 import PostItem from '../../components/PostItem';
 
 const Search = (props) => {
@@ -7,10 +9,24 @@ const Search = (props) => {
   const [last, setLast] = useState('');
   const [page, setPage] = useState(0);
 
+  console.log(props.match.params.keyword);
+  console.log(props.match.params.type);
+  console.log(page);
+
+  const isLogin = useSelector((store) => store.isLogin);
+
   useEffect(() => {
+    if (!isLogin) {
+      alert('로그인 후 이용할 수 있습니다.');
+      props.history.push('/');
+      return;
+    }
+
     fetch(
       'http://localhost:8000/post/search/' +
         props.match.params.keyword +
+        '/' +
+        props.match.params.type +
         '?page=' +
         page,
       {
@@ -42,9 +58,27 @@ const Search = (props) => {
 
   return (
     <div>
-      {posts.map((post) => (
-        <PostItem key={post.id} id={post.id} title={post.title} />
-      ))}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>
+              <BsFlagFill /> 조회수
+            </th>
+          </tr>
+        </thead>
+        {posts.map((post) => (
+          <PostItem
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            writer={post.user.username}
+            views={post.views}
+          />
+        ))}
+      </Table>
       <br />
       <div className="d-flex justify-content-center">
         <Pagination>

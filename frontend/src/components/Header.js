@@ -3,11 +3,11 @@ import { Navbar, Nav, Button, FormControl, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
-import Search from '../pages/post/Search';
 
 const Header = () => {
   const isLogin = useSelector((store) => store.isLogin);
   const dispatch = useDispatch();
+  const [types, setTypes] = useState('title');
   const [keyword, setKeyword] = useState({
     keyword: '',
   });
@@ -58,6 +58,19 @@ const Header = () => {
             )}
           </Nav>
           <Form className="d-flex">
+            <Form.Control
+              as="select"
+              value={types}
+              aria-label="Default select example"
+              onChange={(e) => {
+                setTypes(e.target.value);
+              }}
+            >
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+              <option value="writer">작성자</option>
+            </Form.Control>
+            <t />
             <FormControl
               type="search"
               placeholder="Search"
@@ -66,7 +79,7 @@ const Header = () => {
               aria-label="Search"
               onChange={changeValue}
             />
-            <Link to={'/post/search/' + keyword.keyword}>
+            <Link to={'/post/search/' + keyword.keyword + '/' + types}>
               <Button variant="outline-success">Search</Button>
             </Link>
           </Form>

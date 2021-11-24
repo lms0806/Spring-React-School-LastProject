@@ -1,18 +1,22 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const PostItem = ({ id, title }) => {
+const PostItem = ({ id, title, writer, views }) => {
   console.log(title);
+  console.log('작성자 : ' + writer);
   return (
-    <Card>
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Link to={'/post/' + id} variant="dark" className="btn btn-dark">
-          상세보기
-        </Link>
-      </Card.Body>
-    </Card>
+    <tbody>
+      <tr>
+        <td>{id}</td>
+        <td>
+          <Link to={'/post/' + id} variant="primary">
+            {title}
+          </Link>
+        </td>
+        <td>{writer}</td>
+        <td>{views}</td>
+      </tr>
+    </tbody>
   );
 };
 
