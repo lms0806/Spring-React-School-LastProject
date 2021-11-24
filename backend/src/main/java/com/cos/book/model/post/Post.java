@@ -38,6 +38,8 @@ public class Post {
 	private String title; 
 	@Column(length = 1000000)
 	private String content;
+	private static final int VIEW_DEFAULT_VALUE = 0;
+	private int views = VIEW_DEFAULT_VALUE; //조회수
 	
 	@JoinColumn(name = "userId")
 	@ManyToOne

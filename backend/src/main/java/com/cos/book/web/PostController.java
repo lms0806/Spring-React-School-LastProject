@@ -32,13 +32,13 @@ public class PostController {
 	
 	// 모두 접근 가능
 	@GetMapping({"", "/"})
-	public ResponseEntity<?> home(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+	public ResponseEntity<?> home(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 		return new ResponseEntity<Page<Post>>(postService.글목록(pageable), HttpStatus.OK);
 	}
 	
-	@GetMapping("/post/search/{keyword}")
-	public ResponseEntity<?> search(@PathVariable String keyword, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-		return new ResponseEntity<Page<Post>>(postService.검색(pageable, keyword), HttpStatus.OK);
+	@GetMapping("/post/search/{keyword}/{type}")
+	public ResponseEntity<?> search(@PathVariable String keyword, @PathVariable String type, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+		return new ResponseEntity<Page<Post>>(postService.검색(pageable, keyword, type), HttpStatus.OK);
 	} 
 	 
 	// JWT 토큰만 있으면 접근 가능
@@ -47,10 +47,17 @@ public class PostController {
 		return new ResponseEntity<Post>(postService.글상세(id), HttpStatus.OK);
 	}
 	
+	@PostMapping("/post/{id}")
+	public ResponseEntity<?> updateview(@PathVariable int id){
+		postService.조회수증가(id);
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+	
 	// JWT 토큰만 있으면 접근 가능
 	@PostMapping("/post")
 	public ResponseEntity<?> save(@RequestBody Post post){
 		User principal = (User) session.getAttribute("principal");
+		System.out.println("views : " + post.getViews());
 		postService.글쓰기(post, principal);
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}

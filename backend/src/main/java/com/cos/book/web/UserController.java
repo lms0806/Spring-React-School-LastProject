@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.book.model.post.PostRepository;
+import com.cos.book.model.reply.ReplyRepository;
 import com.cos.book.model.user.User;
 import com.cos.book.model.user.UserRepository;
 import com.cos.book.service.UserService;
@@ -29,6 +31,8 @@ public class UserController {
 
 	private final UserService userService;
 	private final UserRepository userRepository;
+	private final PostRepository postRepository;
+	private final ReplyRepository replyRepository;
 	private final HttpSession session;
 	
 	// (1) 로그인 -  필터에 등록함.
@@ -45,6 +49,24 @@ public class UserController {
 	public ResponseEntity<?> logout() {
 		session.invalidate();
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+	
+	@GetMapping("/myinfo/postCount/{id}")
+	public ResponseEntity<?> postCount(@PathVariable int id){
+		User userEntity = userRepository.findById(id).orElseThrow(()-> new IllegalArgumentException(id+"는 존재하지 않습니다."));
+		System.out.println(userEntity);
+		int postcount = postRepository.countpost(userEntity.getId());
+		System.out.println(postcount);
+		return new ResponseEntity<Integer>(postcount, HttpStatus.OK);
+	}
+	
+	@GetMapping("/myinfo/replyCount/{id}")
+	public ResponseEntity<?> replyCount(@PathVariable int id){
+		User userEntity = userRepository.findById(id).orElseThrow(()-> new IllegalArgumentException(id+"는 존재하지 않습니다."));
+		System.out.println(userEntity);
+		int replycount = replyRepository.countreply(userEntity.getId());
+		System.out.println(replycount);
+		return new ResponseEntity<Integer>(replycount, HttpStatus.OK);
 	}
 	
 	@PostMapping("/searchid")

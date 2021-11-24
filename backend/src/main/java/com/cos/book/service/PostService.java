@@ -11,6 +11,7 @@ import com.cos.book.model.reply.Reply;
 import com.cos.book.model.reply.ReplyRepository;
 import com.cos.book.model.reply.dto.ReplySaveRequestDto;
 import com.cos.book.model.user.User;
+import com.cos.book.model.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class PostService {
 
+	private final UserRepository userRepository;
 	private final PostRepository postRepository;
 	private final ReplyRepository replyRepository;
 	
@@ -33,13 +35,27 @@ public class PostService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<Post> 검색(Pageable pageable, String keyword){
-		return postRepository.findByTitleContains(keyword, pageable);
+	public Page<Post> 검색(Pageable pageable, String keyword, String type){
+		if(type.equals("title")) {
+			return postRepository.findByTitleContains(keyword, pageable);
+		}
+		else if(type.equals("content")){
+			return postRepository.findByContentContains(keyword, pageable);
+		}
+		User user = userRepository.findByUsername(keyword);
+		return postRepository.findwriter(user.getId(), pageable);
 	}
 	
 	@Transactional(readOnly = true)
 	public Post 글상세(int id) {
 		return postRepository.findById(id).orElseThrow(()-> new IllegalArgumentException(id+"는 존재하지 않습니다."));
+	}
+	
+	@Transactional
+	public void 조회수증가(int id) {
+		Post postEntity = postRepository.findById(id).orElseThrow(()-> new IllegalArgumentException(id+"는 존재하지 않습니다."));
+		
+		postRepository.updateViews(postEntity.getId());
 	}
 	
 	@Transactional
